@@ -1,0 +1,26 @@
+from agents import Agent, Runner, ModelSettings
+from dotenv  import load_dotenv
+
+load_dotenv()
+
+agent = Agent(
+    name="Assistant",
+    instructions="You are a helpful assistant.",
+    model_settings=ModelSettings(
+        temperature=0.1,
+        top_p=0.0,
+        frequency_penalty=1.0,
+        presence_penalty=2.0,
+        truncation="disabled"
+    ),
+    model="gpt-3.5-turbo"
+)
+
+sentence = "word" * 17000
+
+result = Runner.run_sync(
+    agent,
+    sentence
+)
+
+print(result.final_output)
