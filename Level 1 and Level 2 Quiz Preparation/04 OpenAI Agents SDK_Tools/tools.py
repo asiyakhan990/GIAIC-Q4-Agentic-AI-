@@ -6,11 +6,11 @@ load_dotenv()
 # enable_verbose_stdout_logging()
 
 
-aysnc def greet_invoke(ctx, input: str):
-    """Ye function tool call par chalega"""
-    args = json.load(input) if input else {}
-    name = args.get("name")
-    return f"Hello, {name}!"
+# aysnc def greet_invoke(ctx, input: str):
+#     """Ye function tool call par chalega"""
+#     args = json.load(input) if input else {}
+#     name = args.get("name")
+#     return f"Hello, {name}!"
 
 
 custom_func = FunctionTool(
@@ -24,7 +24,7 @@ custom_func = FunctionTool(
         "required": ["name"],
         "additionalProperties": False 
     },
-    on_invoke_tool=greet_invoke
+    # on_invoke_tool=greet_invoke
 )
 
 agent = Agent(
