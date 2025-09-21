@@ -11,12 +11,12 @@ agent = Agent(
         top_p=0.0,
         frequency_penalty=1.0,
         presence_penalty=2.0,
-        truncation="disabled"
+        truncation="auto"
     ),
     model="gpt-3.5-turbo"
 )
 
-sentence = "word" * 17000
+sentence = "how are you" * 17000
 
 result = Runner.run_sync(
     agent,
