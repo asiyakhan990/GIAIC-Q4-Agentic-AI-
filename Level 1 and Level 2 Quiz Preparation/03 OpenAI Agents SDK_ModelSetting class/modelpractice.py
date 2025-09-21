@@ -14,10 +14,15 @@ agent = Agent(
         # presence_penalty=2.0,
         # truncation="auto",
         # max_tokens=25,
-        reasoning=Reasoning(
-            # effort=["medium"]
-            summary=["concise"]
-        )
+        # reasoning=Reasoning(
+        #     # effort=["medium"]
+        #     summary=["concise"]
+        # )
+        # metadata={
+        #     "live": "session-4"
+        # }
+        # store=True,
+        include_usage=False
     ),
     # model="gpt-3.5-turbo"
     model="gpt-5",
