@@ -38,3 +38,6 @@ result = Runner.run_sync(
 )
 
 print(result.final_output)
+print(agent.model_settings.to_json_dict)
+print(agent.model_settings.resolve(override=ModelSettings(temperature=0.5)))
+print(agent.model_settings.to_json_dict)
