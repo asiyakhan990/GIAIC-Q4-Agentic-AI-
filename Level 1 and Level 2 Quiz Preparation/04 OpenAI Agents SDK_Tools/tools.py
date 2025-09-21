@@ -1,27 +1,36 @@
-from agents import Agent, Runner, function_tool, enable_verbose_stdout_logging
+import json
+from agents import Agent, Runner, function_tool, enable_verbose_stdout_logging, FunctionTool
 from dotenv import load_dotenv
-import requests
 
 load_dotenv()
-enable_verbose_stdout_logging()
+# enable_verbose_stdout_logging()
 
-@function_tool(name_override="calculate_sum", description_override="Calculate the given numbers")
-def add_numbers(a: int, b: int) -> str:
-    """Add two numbers together
-    
-    Args:
-        a: First number
-        b: Second number
-    """
 
-    result = a + b
-    return f"The sum of {a} and {b} is {result}"
+aysnc def greet_invoke(ctx, input: str):
+    """Ye function tool call par chalega"""
+    args = json.load(input) if input else {}
+    name = args.get("name")
+    return f"Hello, {name}!"
 
+
+custom_func = FunctionTool(
+    name="greeting",
+    description="Greet user with their name",
+    params_json_schema={
+        "type": "object",
+        "properties": {
+            "name": {"type": "string", "description": "The name of the person"}
+        },
+        "required": ["name"],
+        "additionalProperties": False 
+    },
+    on_invoke_tool=greet_invoke
+)
 
 agent = Agent(
     name="Assistant",
     instructions="You are helpful assistant",
-    tools=[add_numbers]
+    tools=[]
 )
 
 result = Runner.run_sync(
@@ -36,7 +45,17 @@ print(result.final_output)
 
 
 
+# @function_tool(name_override="calculate_sum", description_override="Calculate the given numbers")
+# def add_numbers(a: int, b: int) -> str:
+#     """Add two numbers together
+    
+#     Args:
+#         a: First number
+#         b: Second number
+#     """
 
+#     result = a + b
+#     return f"The sum of {a} and {b} is {result}"
 
 
 
