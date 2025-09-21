@@ -16,7 +16,7 @@ agent = Agent(
 
 result = Runner.run_sync(
     agent,
-    "Hello"
+    "Hello how are you?"
 )
 
 print(result.final_output)
